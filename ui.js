@@ -6,14 +6,17 @@ class Ui {
         this.uiQuantity = document.getElementById("quantity");
         this.uiForm = document.getElementById("form-data");
         this.container = document.getElementById("container-table");
+        this.uidelete=document.getElementById("eliminar");
         this.manager =  new ProductsManagement();
         let p1 = new Products("Pollo", "Pollo Sofia", 20);
         let p2 = new Products("Galletas", "Galleras Mabel", 50);
         let p3 = new Products("Pollo", "Pollo Imba", 50);
         this.manager.addProducts(p1);
         this.manager.addProducts(p2);
-        this.manager.addProducts(p3);
+        this.manager.addProducts(p3);        
         this.loadEvents();
+
+        
     }
     loadEvents() {
         this.uiForm.addEventListener("submit", (e) => {
@@ -24,6 +27,13 @@ class Ui {
                 this.uiQuantity.value);
             this.clearForm();
         });
+        this.uidelete.addEventListener("submit",
+        this.addProducts(
+            this.uiName.value,
+            this.uiDescription.value,
+            this.uiQuantity.value),
+        this.clearForm()
+         );
     }
     clearForm() {
                 this.uiName.value = "";
@@ -49,6 +59,15 @@ class Ui {
         this.loadTable();
 
     }
+    removeProduct(name, description, quantity) {
+        let p1 = new Products(name, description, quantity);
+        this.manager.removeProducts(p1);
+        this.loadTable();
+    }
+    prueba(){
+        alert("ho yhea");
+    }
 }
 let ui = new Ui();
 ui.loadTable();
+
